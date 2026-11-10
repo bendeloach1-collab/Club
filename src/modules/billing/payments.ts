@@ -1,5 +1,5 @@
 import { and, eq, inArray, lt, sql } from "drizzle-orm";
-import { db, type DbOrTx, type Tx } from "@/db";
+import { db, type DbOrTx } from "@/db";
 import { billingAccounts, payments, type PaymentLineItem, type PaymentStatus } from "@/db/schema";
 import { env } from "@/lib/env";
 import { ConflictError, NotFoundError, ValidationError } from "@/lib/errors";

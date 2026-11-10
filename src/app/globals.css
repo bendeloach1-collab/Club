@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #0b1524;
+  --color-ink-900: #111e31;
+  --color-ink-800: #1a2b44;
+  --color-ink-700: #2a3f5f;
+  --color-ink-500: #5b6b82;
+  --color-ink-300: #a9b4c4;
+  --color-paper: #f6f4ef;
+  --color-line: #e3dfd5;
+  --color-brass-700: #7c5f2e;
+  --color-brass-600: #96753b;
+  --color-brass-500: #b08d57;
+  --color-brass-100: #f1e8d8;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink-900 antialiased;
+  }
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brass-600);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-ink-900 text-white hover:bg-ink-700;
+  }
+  .btn-accent {
+    @apply bg-brass-600 text-white hover:bg-brass-700;
+  }
+  .btn-secondary {
+    @apply border border-ink-300 bg-white text-ink-900 hover:bg-ink-900/5;
+  }
+  .btn-danger {
+    @apply border border-red-300 bg-white text-red-800 hover:bg-red-50;
+  }
+  .btn-sm {
+    @apply min-h-9 px-3 py-1 text-xs;
+  }
+  .card {
+    @apply rounded-xl border border-line bg-white p-5 shadow-sm;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-ink-800;
+  }
+  .input {
+    @apply block min-h-11 w-full rounded-md border border-ink-300 bg-white px-3 py-2 text-base text-ink-900 placeholder:text-ink-300 focus:border-brass-600;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .table-wrap {
+    @apply overflow-x-auto rounded-xl border border-line bg-white;
+  }
+  .table {
+    @apply w-full min-w-[36rem] text-left text-sm;
+  }
+  .table th {
+    @apply border-b border-line bg-paper px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-ink-500;
+  }
+  .table td {
+    @apply border-b border-line px-4 py-3 align-top;
+  }
+  .table tr:last-child td {
+    @apply border-b-0;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-brass-700;
+  }
+}

@@ -188,3 +188,17 @@ export async function listStaff(tx: DbOrTx = db) {
     .groupBy(user.id, user.name)
     .orderBy(asc(user.name));
 }
+
+/** Staff confirm a declared guardian relationship (required before Kids Club pickup authority). */
+export async function verifyGuardianship(actor: Actor, guardianPersonId: string, childPersonId: string) {
+  assertCan(actor, "members.manage");
+  await db.transaction(async (tx) => {
+    const [g] = await tx
+      .update(guardianships)
+      .set({ verifiedAt: new Date(), verifiedByUserId: actor.userId })
+      .where(and(eq(guardianships.guardianPersonId, guardianPersonId), eq(guardianships.childPersonId, childPersonId)))
+      .returning();
+    if (!g) throw new NotFoundError("Guardianship");
+    await audit(tx, { actorUserId: actor.userId, action: "permission.guardian_verified", entityType: "person", entityId: childPersonId, data: { guardianPersonId } });
+  });
+}
